@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dados do Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input{
+            width:274px;
+            border-radius:15px;
+            border:1.5px solid #C0C0C0;
+        }
+
+        .form-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .form-input {
+            padding: 10px;
+            width: 100%;
+        }
+
+        .form-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-label{
+            border-radius: 15px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            background-color: #f8f8f8;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<h2>Dados do Usuário</h2>
+<form class="form-container" th:action="@{/client}" th:object="${client}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <div class="form-input">
+        <div>
+            <label for="client_name">Nome</label>
+        </div>
+        <div>
+            <input type="text" id="client_name" th:field="*{client_name}">
+        </div>
+    </div>
+    <div class="form-input" >
+        <div>
+            <label for="client_email">Email</label>
+        </div>
+        <div>
+            <input type="text" id="client_email" th:field="*{client_email}">
+        </div>
+    </div>
+    <div class="form-input">
+        <div>
+            <label for="client_birthday">Data de nascimento</label>
+        </div>
+        <div>
+            <input type="text" id="client_birthday" placeholder="" th:field="*{client_birthday}">
+        </div>
+    </div>
+    <div class="form-input">
+        <div>
+            <label for="client_cell">Celular</label>
+        </div>
+        <div>
+            <input type="text" id="client_cell" th:field="*{client_cell}">
+        </div>
+    </div>
+    <div class="form-button">
+        <button type="submit">Enviar</button>
+    </div>
+</form>
+<a class="back-link" th:href="@{/client}">Voltar</a>
+</body>
+</html>

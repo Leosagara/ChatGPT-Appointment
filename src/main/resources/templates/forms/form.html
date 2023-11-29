@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulário do Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input{
+            width:274px;
+            border-radius:15px;
+            border:1.5px solid #C0C0C0;
+        }
+
+        .form-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .form-input {
+            padding: 10px;
+            width: 100%;
+        }
+
+        .form-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-label{
+            border-radius: 15px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            background-color: #f8f8f8;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<h2>Formulário do Paciente</h2>
+<form class="form-container" th:action="@{/form}" th:object="${form}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <div class="form-input">
+        <div>
+            <label for="age">Idade</label>
+        </div>
+        <div>
+            <input type="text" id="age" th:field="*{age}">
+        </div>
+    </div>
+    <div class="form-input" >
+        <div>
+            <label for="gender">Gênero</label>
+        </div>
+        <div>
+            <input type="text" id="gender" th:field="*{gender}">
+        </div>
+    </div>
+    <div class="form-input">
+        <div>
+            <label for="symptoms">Sintomas</label>
+        </div>
+        <div>
+            <input type="text" id="symptoms" placeholder="" th:field="*{symptoms}">
+        </div>
+    </div>
+    <div class="form-input">
+        <div>
+            <label for="medical_history">Histórico Médico</label>
+        </div>
+        <div>
+            <input type="text" id="medical_history" th:field="*{medical_history}">
+        </div>
+    </div>
+    <div class="form-input">
+        <div>
+            <label for="habits">Hábitos</label>
+        </div>
+        <div>
+            <input type="text" id="habits" th:field="*{habits}">
+        </div>
+    </div>
+    <div class="form-input">
+        <div>
+            <label for="others">Outras observações</label>
+        </div>
+        <div>
+            <input type="text" id="others" th:field="*{others}">
+        </div>
+    </div>
+
+    <div class="form-button">
+        <button type="submit">Enviar</button>
+    </div>
+</form>
+<a class="back-link" th:href="@{/client}">Voltar</a>
+
+</body>
+</html>
