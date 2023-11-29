@@ -38,7 +38,7 @@ public class Form extends BaseEntity {
     private String others;
     @Column(length = 1000)
     private String prompt;
-    @Column(length = 1000)
+    @Column(length = 3000)
     private String response;
 
     public Form(String age, String gender, String symptoms, String medical_history, String habits, String others) {
@@ -53,12 +53,12 @@ public class Form extends BaseEntity {
     public String generatePrompt(){
         return "Eu tenho "+age+" anos de idade,gênero:"+gender+",meus sintomas são:"+symptoms+",meu histórico de doenças é:"+
                medical_history+",e meu habitos são:"+habits+"." +
-                "Considerando estes fatores indique alguns exames para eu fazer(no máximo 2) e de quanto em quanto tempo devo fazer.";
+                "Considerando estes fatores indique 1 exame para eu fazer e de quanto em quanto tempo devo fazer. Responda com respostas curtas.";
     }
 
     public String generateResponse(Form form) throws IOException, InterruptedException {
 
-        String apiKey = "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";
+        String apiKey = "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";
         String requestBody = """
             {
                 "model": "gpt-4",
@@ -74,7 +74,7 @@ public class Form extends BaseEntity {
                 "temperature": 0.7,
                 "max_tokens": 150
             }
-            """.formatted("Limite os caracteres das respostas para 100.");
+            """.formatted("Me responda as proximas perguntas somente com: (Tipo de exame)-(Em quanto tempo preciso fazer o exame), pode ser?");
 
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -95,6 +95,7 @@ public class Form extends BaseEntity {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(jsonResponse);
         String content = rootNode.at("/choices/0/message/content").asText();
+        System.out.println(response2.body());
         return content;
 
 
