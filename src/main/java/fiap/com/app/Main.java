@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
 
 @SpringBootApplication
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
         SpringApplication.run(Main.class, args);
     }
 

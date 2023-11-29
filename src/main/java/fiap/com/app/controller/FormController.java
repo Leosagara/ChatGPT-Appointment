@@ -2,6 +2,7 @@ package fiap.com.app.controller;
 
 import fiap.com.app.models.Form;
 import fiap.com.app.service.FormService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +23,6 @@ public class FormController {
         return "forms/menu";
     }
 
-    @GetMapping("/response")
-    public String response(@ModelAttribute("createdForm") Form createdForm, Model model){
-        createdForm.setPrompt(createdForm.generatePrompt());
-        createdForm.setPrompt(createdForm.generatePrompt());
-        System.out.println(createdForm.getResponse());
-        return "forms/response";
-    }
-
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("form", new Form());
@@ -37,11 +30,12 @@ public class FormController {
     }
 
     @PostMapping
-    public String saveForm(@ModelAttribute Form form) throws IOException, InterruptedException {
+    public String saveForm(@ModelAttribute("createdForm") Form form, Model model) throws IOException, InterruptedException {
         form.setPrompt(form.generatePrompt());
         form.setResponse(form.generateResponse(form));
         formService.saveForm(form);
-        return "redirect:form/response";
+        model.addAttribute("createdForm", form);
+        return "forms/response";
     }
 
     @GetMapping("/edit/{id}")

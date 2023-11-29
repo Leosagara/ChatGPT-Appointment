@@ -11,15 +11,23 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.Entity;
+import lombok.ToString;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@ToString
+@Table(name="form")
+@AttributeOverride(name = "id", column = @Column(name = "form_id"))
 public class Form extends BaseEntity {
 
     private String age;
@@ -28,7 +36,9 @@ public class Form extends BaseEntity {
     private String medical_history;
     private String habits;
     private String others;
+    @Column(length = 1000)
     private String prompt;
+    @Column(length = 1000)
     private String response;
 
     public Form(String age, String gender, String symptoms, String medical_history, String habits, String others) {
@@ -42,11 +52,13 @@ public class Form extends BaseEntity {
 
     public String generatePrompt(){
         return "Eu tenho "+age+" anos de idade,gênero:"+gender+",meus sintomas são:"+symptoms+",meu histórico de doenças é:"+
-               medical_history+",e meu habitos são:"+habits+".Considerando estes fatores quais exames eu deveria fazer e em quanto tempo preciso fazê-los";
+               medical_history+",e meu habitos são:"+habits+"." +
+                "Considerando estes fatores indique alguns exames para eu fazer(no máximo 2) e de quanto em quanto tempo devo fazer.";
     }
 
     public String generateResponse(Form form) throws IOException, InterruptedException {
-        String apiKey = "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";
+
+        String apiKey = "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";
         String requestBody = """
             {
                 "model": "gpt-4",
@@ -55,6 +67,15 @@ public class Form extends BaseEntity {
                 "max_tokens": 150
             }
             """.formatted(form.getPrompt());
+        String requestBody2 = """
+            {
+                "model": "gpt-4",
+                "messages": [{"role": "user", "content": "%s"}],
+                "temperature": 0.7,
+                "max_tokens": 150
+            }
+            """.formatted("Limite os caracteres das respostas para 100.");
+
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.openai.com/v1/chat/completions"))
@@ -62,13 +83,21 @@ public class Form extends BaseEntity {
                 .header("Authorization", "Bearer " + apiKey)
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            String jsonResponse = response.body();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(jsonResponse);
-            String content = rootNode.at("/choices/0/message/content").asText();
-
+        HttpRequest request2 = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.openai.com/v1/chat/completions"))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + apiKey)
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody2))
+                .build();
+        HttpResponse<String> response2 = httpClient.send(request2, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        String jsonResponse = response.body();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(jsonResponse);
+        String content = rootNode.at("/choices/0/message/content").asText();
         return content;
+
+
     }
 
     public Form(String age, String gender, String symptoms, String medical_history, String habits, String others, String text) throws IOException, InterruptedException {
