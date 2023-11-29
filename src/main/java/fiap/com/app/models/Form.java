@@ -11,14 +11,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.Entity;
 import lombok.ToString;
 
 @Getter
@@ -35,20 +32,10 @@ public class Form extends BaseEntity {
     private String symptoms;
     private String medical_history;
     private String habits;
-    private String others;
     @Column(length = 1000)
     private String prompt;
     @Column(length = 3000)
     private String response;
-
-    public Form(String age, String gender, String symptoms, String medical_history, String habits, String others) {
-        this.age = age;
-        this.gender = gender;
-        this.symptoms = symptoms;
-        this.medical_history = medical_history;
-        this.habits = habits;
-        this.others = others;
-    }
 
     public String generatePrompt(){
         return "Eu tenho "+age+" anos de idade,gênero:"+gender+",meus sintomas são:"+symptoms+",meu histórico de doenças é:"+
@@ -101,12 +88,7 @@ public class Form extends BaseEntity {
 
     }
 
-    public Form(String age, String gender, String symptoms, String medical_history, String habits, String others, String text) throws IOException, InterruptedException {
-        this.age = age;
-        this.gender = gender;
-        this.symptoms = symptoms;
-        this.medical_history = medical_history;
-        this.habits = habits;
-        this.others = others;
-    }
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 }
