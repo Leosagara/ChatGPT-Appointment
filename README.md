@@ -1,3 +1,5 @@
+### Link para o Github - 
+
 ## INTEGRANTES
 - Ayslan Garcia – responsável pela implementação de API’s e auxílio na parte de projetos;
 - Leonardo Sagara – responsável pelo desenvolvimento back-end e auxílio na parte de projetos;
@@ -28,7 +30,7 @@ Plataforma online que através de requisitos passados pelo paciente, consiga, ut
 - Documentação Técnica Detalhada;
 - Relatório de Testes e Validação.
 
-### O que ficará fora do escopo
+## O que ficará fora do escopo
 O projeto não incluirá a prestação de serviços médicos ou consultas diretas aos usuários.
 Não serão adicionados novos dados ao modelo do Machine Learning.
 A plataforma não terá a capacidade de prescrever medicamentos.
@@ -41,6 +43,9 @@ A plataforma não terá a capacidade de prescrever medicamentos.
 - Banco de dados: Oracle database 19.0.0;
 - Controle de Versão - Git;
 - Serviços de Cloud - Docker 4.25.2.
+
+## Diagrama de classes
+<img width="728" alt="Captura de Tela (172)" src="https://github.com/Leosagara/Global-Solution/assets/75694982/23adb2de-60f8-4e3d-b970-04c5aad12339">
 
 
 
