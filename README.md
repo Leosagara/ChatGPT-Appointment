@@ -27,3 +27,21 @@ Plataforma online que através de requisitos passados pelo paciente, consiga, ut
 - Protótipo Funcional da Plataforma de Predição de Exames;
 - Documentação Técnica Detalhada;
 - Relatório de Testes e Validação.
+
+### O que ficará fora do escopo
+O projeto não incluirá a prestação de serviços médicos ou consultas diretas aos usuários.
+Não serão adicionados novos dados ao modelo do Machine Learning.
+A plataforma não terá a capacidade de prescrever medicamentos.
+
+
+## Teconologias utilizadas
+- Linguagem de programção - Java 18;
+- Frameworks - Springboot 3.1.5, Hibernate 3;
+- Fornt-end - React 18;
+- Banco de dados: Oracle database 19.0.0;
+- Controle de Versão - Git;
+- Serviços de Cloud - Docker 4.25.2.
+
+
+
+
