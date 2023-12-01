@@ -45,7 +45,7 @@ public class Form extends BaseEntity {
 
     public String generateResponse(Form form) throws IOException, InterruptedException {
 
-        String apiKey = "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";
+        String apiKey = "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";
         String requestBody = """
             {
                 "model": "gpt-4",
