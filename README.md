@@ -1,4 +1,6 @@
-### Link para o Github - https://github.com/Leosagara/Global-Solution.git
+### Github - https://github.com/Leosagara/Global-Solution.git
+### Video de testes das funcionalidades - https://youtu.be/B09uvvpgRes
+### Pitch - https://youtu.be/Y0awPv5_TM4
 
 ## INTEGRANTES
 - Ayslan Garcia – responsável pela implementação de API’s e auxílio na parte de projetos;
