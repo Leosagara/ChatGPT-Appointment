@@ -46,7 +46,7 @@ A plataforma não terá a capacidade de prescrever medicamentos.
 ## Teconologias utilizadas
 - Linguagem de programção - Java 18;
 - Frameworks - Springboot 3.1.5, Hibernate 3;
-- Fornt-end - React 18;
+- Front-end - React 18;
 - Banco de dados: Oracle database 19.0.0;
 - Controle de Versão - Git;
 - Serviços de Cloud - Docker 4.25.2.
